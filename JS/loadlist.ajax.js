@@ -4,6 +4,10 @@
  * Constant RESTROUTE and variable token inherited from oauth.js.
  */
 
+ var pageCount = 1;
+
+
+
  function getDate(object){
 
  	// date format
@@ -44,7 +48,7 @@
  }
 
  function createTaskList(object) {
- 	$('.task-list').empty().append('<ul></ul>');
+ 	// $('.task-list').empty().append('<ul></ul>');
 
  	for( let i=0; i<object.length; i++ ) {
  		let navListItem =
@@ -60,33 +64,65 @@
 
  		$('.task-list ul').append(navListItem);
  	}
- 	console.info(object);
- }
- function getTaskList() {
+ 	// console.info(object);
 
- 	$(".task-list").append('<div class="loader"><img src="JS/spinner.svg" class="ajax-loader" /></div>');
-
- 	jso.ajax({
- 		dataType: 'json',
- 		url: RESTROUTE
- 	})
-
- 	.done(function(object) {
- 		createTaskList(object);
- 	})
-
- 	.fail(function() {
- 		console.error("REST error. Nothing returned for AJAX.");
- 	})
-
- 	.always(function() {
- 		$('.loader').remove();
- 	})
+ 	$('.main-area').append('<button class="more">Memuat Buku</button>');
+ 	morePostsTrigger();
 
  }
 
- if ( token !== null ) {
- 	getTaskList();
- } else {
- 	window.location.href = "/";
- }
+ function getTaskList(listRoute) {
+
+	$('.more').remove();
+
+	$(".task-list").append('<div class="loader"><img src="JS/spinner.svg" class="ajax-loader" /></div>');
+
+	jso.ajax({
+		dataType: 'json',
+		url: listRoute
+	})
+
+	.done(function(object) {
+		createTaskList(object);
+	})
+
+	.fail(function() {
+		console.error("REST error. Nothing returned for AJAX.");
+	})
+
+	.always(function() {
+		$('.loader').remove();
+	})
+
+}
+
+
+// fungsi morePost
+
+function morePostsTrigger() {
+
+	var triggerPosition = $('.more').offset().top - $(window).outerHeight();
+
+	$(window).scroll(function(event) {
+		if ( triggerPosition > $(window).scrollTop() ){
+			return;
+		}
+
+		pageCount++;
+
+		listRoute = RESTROUTE + '?page=' + pageCount;
+
+		getTaskList(listRoute);
+
+		$(this).off(event);
+	});
+}
+
+
+
+if ( token !== null ) {
+	let listRoute = RESTROUTE;
+	getTaskList(listRoute);
+} else {
+	window.location.href = "/";
+}
