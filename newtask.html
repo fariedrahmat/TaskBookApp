@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Data Buku</title>
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i" rel="stylesheet">
+  <link rel="stylesheet" href="style-main.css" type="text/css" media="all">
+
+  <script src="JS/libs/jquery-2.1.3.min.js" defer></script>
+  <script src="JS/libs/jso.js" defer></script>
+
+  <script src="JS/oauth.js" defer></script>
+  <script src="JS/edittask.ajax.js" defer></script>
+
+</head>
+
+<body>
+  <a class="skip-link screen-reader-text" href="#content">Skip to content</a>
+
+  <header class="masthead">
+    <div class="site-header">
+      <div class="site-branding">
+        <p class="site-title">Gudang Buku</p>
+      </div><!-- .site-title -->
+      <div class="logout">
+        <button id="logout" class="logout-button">Log out</button>
+      </div><!-- .logout -->
+    </div><!-- .centered -->
+  </header><!-- .masthead -->
+
+  <main class="main-area single-task">
+    <article class="task">
+      <h2 class="task-title">Tambah Buku</h2>
+      <form id="task-form" method="POST">
+        <label for="title">
+          <span class="label">Judul Buku</span>
+          <input type="text" name="title" required></input>
+        </label>
+        <label for="description">
+          <span class="label">Deskripsi Buku</span>
+          <textarea name="description" rows="10" cols="50" minlength="20" required></textarea>
+        </label>
+        <label for="kategori">
+          <span class="label">Kategori</span>
+          <span class="field-description">Kategori</span><br>
+          <input name="kategori" rows="10" cols="50" minlength="2" required></input>
+        </label>
+        <fieldset class="stress-level">
+          <legend class="label">Tingkatan Buku </legend>
+          <label for="1">
+            <input type="radio" name="pre-level" value="1" id="1" required>
+            Mudah
+          </label>
+          <label for="2">
+            <input type="radio" name="pre-level" value="2" id="2" required>
+            Sedang
+          </label>
+          <label for="3">
+            <input type="radio" name="pre-level" value="3" id="3" required>
+            Sulit
+          </label>
+          
+        </fieldset>
+        <input type="submit" value="Tambah Buku">
+      </form>
+    </article><!-- .task -->
+  </main><!-- .main-area -->
+
+  <nav class="site-nav">
+    <ul>
+      <li>
+        <a href="tasklist.html">Semua Buku</a>
+      </li>
+      <li>
+        <a href="newtask.html">Tambah Buku</a>
+      </li>
+      <li>
+        <a href="review.html">Review</a>
+      </li>
+    </ul>
+  </nav><!-- .site-nav -->
+
+  <footer class="footer">
+    <section class="footer-widgets centered">
+      <div class="footer-title">Task Book</div>
+    </section><!-- .footer-widgets -->
+  </footer><!-- .footer -->
+
+</body>
+
+</html>
